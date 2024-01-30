@@ -5,7 +5,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-MONGODB_HOST=mongodb.sureshdayyala.online
+MONGDB_HOST=mongodb.sureshdayyala.online
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -78,17 +78,17 @@ VALIDATE $? "enabled catalogue"
 
 systemctl start catalogue &>> $LOGFILE
 
-VALIDATE $? "started catalogue" 
+VALIDATE $? "starting catalogue" 
 
 cp /home/centos/roboshop-shell/mongo.repo /etc/yum.repos.d/mongo.repo 
 
-VALIDATE $? "copying catalogue repo" 
+VALIDATE $? "copying mongodb repo" 
 
 dnf install mongodb-org-shell -y &>> $LOGFILE
 
 VALIDATE $? "installing MongoDB client" 
 
-mongo --host $MONGODB_HOST </app/schema/catalogue.js &>> $LOGFILE
+mongo --host $MONGDB_HOST </app/schema/catalogue.js &>> $LOGFILE
 
 VALIDATE $? "Loading catalogue data into MongoDB" 
 
