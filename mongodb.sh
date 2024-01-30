@@ -9,7 +9,7 @@ N="\e[0m"
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
 
-echo "script started executing at $TIMESTAMP" &>> $LOGFILE
+echo "script started executhjhhhhing at $TIMESTAMP" &>> $LOGFILE
 
 VALIDATE (){
     if [ $1 -ne 0 ]
@@ -27,3 +27,28 @@ then
 else
     echo "you are root user"
 fi
+
+cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOGFILE
+
+VALIDATE $? "Copied MongoDB Repo"
+
+dnf instll mongodb-org -y &>> $LOGFILE
+
+VALIDATE $? "Install MongoDB"
+
+systemctl enable mongod &>> $LOGFILE
+
+VALIDATE $? "Enabling MongoDB"
+
+systemctl start mongod &>> $LOGFILE
+
+VALIDATE $? "Start MongoDb" 
+
+sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOGFILE
+
+VALIDATE $? "Remote Access to MongoDB" 
+
+systemctl restart mongod &>> $LOGFILE
+
+VALIDATE $? "Restarting MongoDB" 
+
