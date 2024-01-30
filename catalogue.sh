@@ -36,7 +36,7 @@ VALIDATE $? "Disabling old nodejs"
 
 dnf module enable nodejs:18 -y &>> $LOGFILE
 
-VALIDATE $? "enabling new nodejs" 
+VALIDATE $? "enabling new nodejs:18" 
 
 dnf install nodejs -y &>> $LOGFILE
 
@@ -44,7 +44,7 @@ VALIDATE $? "Installing nodejs"
 
 useradd roboshop &>> $LOGFILE
 
-VALIDATE $? "adding user"
+VALIDATE $? "creating roboshop user"
 
 mkdir -p /app &>> $LOGFILE
 
@@ -53,6 +53,8 @@ VALIDATE $? "creating app directory"
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $LOGFILE
 
 VALIDATE $? "Downloading catalogue application" 
+
+cd /app
 
 unzip -o /tmp/catalogue.zip &>> $LOGFILE
 
