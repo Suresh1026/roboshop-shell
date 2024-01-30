@@ -5,7 +5,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-MONGODB_Host=mongodb.sureshdayyala.online
+MONGODB_HOST=mongodb.sureshdayyala.online
 
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOGFILE="/tmp/$0-$TIMESTAMP.log"
@@ -38,7 +38,7 @@ dnf module enable nodejs:18 -y &>> $LOGFILE
 
 VALIDATE $? "enabling new nodejs" 
 
-dnf install nodejs -y
+dnf install nodejs -y &>> $LOGFILE
 
 VALIDATE $? "Installing nodejs" 
 
@@ -86,7 +86,7 @@ dnf install mongodb-org-shell -y &>> $LOGFILE
 
 VALIDATE $? "installing MongoDB client" 
 
-mongo --host $MONGODB_Host </app/schema/catalogue.js &>> $LOGFILE
+mongo --host $MONGODB_HOST </app/schema/catalogue.js &>> $LOGFILE
 
 VALIDATE $? "Loading catalogue data into MongoDB" 
 
