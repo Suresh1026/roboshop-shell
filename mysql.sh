@@ -38,7 +38,11 @@ cp mysql.repo /etc/yum.repos.d/mysql.repo &>> $LOGFILE
 
 VALIDATE $? "copied mysql repo"
 
-systemctl enable mysql &>> $LOGFILE
+dnf install mysql-community-server -y &>> $LOGFILE
+
+VALIDATE $? "Installing mysql server"
+
+systemctl enable mysqld &>> $LOGFILE
 
 VALIDATE $? "Enabling mysql server"
 
