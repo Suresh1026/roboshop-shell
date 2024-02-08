@@ -2,7 +2,7 @@
 
 AMI=ami-0f3c7d07486cad139
 SG_ID=sg-03bceb879f1cc352a
-INSTANCES=("mongodb" "rabbitmq" "mysql" "Shipping" "user" "cart" "redis" "payment" "catalogue" "dispatch" "web")
+INSTANCES=("mongodb" "rabbitmq" "mysql" "shipping" "user" "cart" "redis" "payment" "catalogue" "dispatch" "web")
 ZONE_ID=Z01157182BWHQA6G8PULV
 DOMAIN_NAME=sureshdayyala.online
 
