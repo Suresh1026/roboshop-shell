@@ -16,8 +16,7 @@ do
 
 
     aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type $INSTANCES_TYPE 
-    --security-group-ids sg-03bceb879f1cc352a --tag-specifications 
-    "ResourceType=instance,Tags=[{Key=name,Value=$i}]"
+    --security-group-ids sg-03bceb879f1cc352a --tag-specifications "ResourceType=instance,Tags=[{Key=name,Value=$i}]"
     
 done
 
