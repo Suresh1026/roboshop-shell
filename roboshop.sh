@@ -6,7 +6,6 @@ INSTANCES=("mongodb" "rabbitmq" "mysql" "Shipping" "user" "cart" "redis" "paymen
 
 for i in "${INSTANCES[@]}"
 do
-    echo "instance is: $i"
     if  [ $i = "mongodb" ] || [ $i = "mysql" ] || [ $i = "shipping" ]
     then
         INSTANCES_TYPE="t3.small"
@@ -14,7 +13,7 @@ do
         INSTANCES_TYPE="t2.micro"
     fi
     
-    aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type $INSTANCES_TYPE --security-group-ids sg-03bceb879f1cc352a --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]"
-    
+    IP_ADDRESS=$(aws ec2 run-instances --image-id ami-0f3c7d07486cad139 --instance-type $INSTANCES_TYPE --security-group-ids sg-03bceb879f1cc352a --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" --query 'Instances[0].PrivateIpAddress' --output text)
+    echo "$i: $IP_ADDRESS"
 done
 
